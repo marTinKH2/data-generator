@@ -9,7 +9,7 @@ from app import cors
 
 @app.route("/api/")
 def root():
-    return jsonify({"message": "Hello World"})
+    return jsonify({"message": "Hello World test"})
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=80)
