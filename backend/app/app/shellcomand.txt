@@ -1,0 +1,2 @@
+kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic Random-Signal
+docker exec -it kafka /bin/sh
