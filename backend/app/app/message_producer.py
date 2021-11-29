@@ -16,8 +16,8 @@ def sendRandomSignal():
     value_serializer=serialize
     )
 
-    i=0
-    while(i<20):
+ 
+    while(True):
         random_number= int(random.randint(1,1000))
         print(f"Sending number {random_number}")
         producer.send('Random-Signal', random_number)
