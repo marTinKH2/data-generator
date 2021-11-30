@@ -39,7 +39,7 @@ def sendPeriodicSinusSignal(frequence):
         for i in range(0,360):
             periodic_number= frequence*math.sin(math.radians(i))
             print(f"Sending number {periodic_number}")
-            producer.send('Random-Signal', periodic_number)
+            producer.send('Periodic-Signal', periodic_number)
             sleep(0.1)
 
 
