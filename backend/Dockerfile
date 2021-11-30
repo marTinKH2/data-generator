@@ -2,7 +2,8 @@ FROM tiangolo/uwsgi-nginx-flask:python3.6
 
 RUN pip install flask_cors
 RUN pip install kafka-python
-RUN pip install Faker
+RUN pip install numpy
+
 
 COPY ./app /app
 WORKDIR /app/

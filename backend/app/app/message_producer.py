@@ -1,5 +1,6 @@
 
 import json,random,math
+from numpy.random import normal
 from time import sleep
 from kafka import KafkaProducer
 
@@ -56,7 +57,23 @@ def sendPeriodicCosinusSignal(frequence):
             producer.send('Periodic-Signal', periodic_number)
             sleep(0.1)
 
-sendPeriodicCosinusSignal(50)
-#sendRandomSignal(100000)
+
+def sendEmphasisedRandomSinal(center,scale):
+    while(True):
+        data = normal(loc=center, scale=scale, size=200)
+        for i in data:
+            emphasisedNumber = i
+            print(f"Sending number {emphasisedNumber}")
+            producer.send('Emphasised-Signal', emphasisedNumber)
+            sleep(0.2)
+
+
+       
+        
+
+
+#sendEmphasisedRandomSinal(100,8)
+#sendPeriodicCosinusSignal(50)
+#sendRandomSignal(1,100000)
         
 
