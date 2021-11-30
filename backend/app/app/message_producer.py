@@ -22,7 +22,7 @@ def sendRandomSignal():
         print(f"Sending number {random_number}")
         producer.send('Random-Signal', random_number)
         sleep(1)
-        i=i+1
+        
 
 sendRandomSignal()
         
