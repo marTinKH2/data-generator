@@ -5,8 +5,6 @@ from flask import Flask, jsonify
 # Import app code
 app = Flask(__name__)
 
-# After creating the app, so that cors can import it
-#from app import message_producer
 
 
 
