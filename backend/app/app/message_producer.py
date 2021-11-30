@@ -33,7 +33,7 @@ def sendPeriodicSinusSignal(frequence):
     """Es wird ein Sinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
     Args:
-        frequence ([type]): [description]
+        frequence (float): Die Frequenz des Signals
     """
     while(True):
         for i in range(0,360):
@@ -41,9 +41,22 @@ def sendPeriodicSinusSignal(frequence):
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
             sleep(0.1)
+            
 
+def sendPeriodicCosinusSignal(frequence):
+    """Es wird ein Cosinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
-sendPeriodicSinusSignal(50)
+    Args:
+        frequence (float): Die Frequenz des Signals
+    """
+    while(True):
+        for i in range(0,360):
+            periodic_number= frequence*math.cos(math.radians(i))
+            print(f"Sending number {periodic_number}")
+            producer.send('Periodic-Signal', periodic_number)
+            sleep(0.1)
+
+sendPeriodicCosinusSignal(50)
 #sendRandomSignal(100000)
         
 
