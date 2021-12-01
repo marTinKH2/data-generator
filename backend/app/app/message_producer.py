@@ -52,7 +52,7 @@ def sendPeriodicCosinusSignal(frequence):
     """
     while(True):
         for i in range(0,360):
-            periodic_number= frequence*math.cos(math.radians(i))
+            periodic_number = frequence*math.cos(math.radians(i))
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
             sleep(0.1)
@@ -68,10 +68,24 @@ def sendEmphasisedRandomSinal(center,scale):
             sleep(0.2)
 
 
+def sendSpikedSignal(distance, propability, size, base):
+    i=0
+    while(True):
+        if i % distance == 0 and random.random() <= propability:
+            spiked_number = base + size
+            print(f"Sending number {spiked_number}")
+        else:
+            spiked_number = base 
+            print(f"Sending number {spiked_number}")
+        producer.send('Emphasised-Signal', spiked_number)
+        sleep(0.2)
+        i=i+1
+    
+
        
         
 
-
+sendSpikedSignal(4,0.8,3.5,100)
 #sendEmphasisedRandomSinal(100,8)
 #sendPeriodicCosinusSignal(50)
 #sendRandomSignal(1,100000)
