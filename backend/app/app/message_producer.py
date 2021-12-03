@@ -1,4 +1,3 @@
-
 import json,random,math
 from numpy.random import normal
 from time import sleep
@@ -17,7 +16,7 @@ producer = KafkaProducer(
 
 
 def sendRandomSignal(lowerBoundary, upperBoundary):
-    """Es wird eine Random-Zahl zwischen 1 und dem übergebenen Parameter erstellt und diese an das Kafka Topic "Random Signal" geschickt. 
+    """Es wird eine Random-Zahl zwischen 'lowerBoundary' und 'upperBoundary' erstellt und diese an das Kafka Topic "Random Signal" geschickt. 
     Danach schläft die Methode für eine Sekunde und wiederholt den Vorgang.
     
     Args:
@@ -59,6 +58,13 @@ def sendPeriodicCosinusSignal(frequence):
 
 
 def sendEmphasisedRandomSinal(center,scale):
+    """Es wird ein Signal, das einer Normalverteilung mit dem Erwartungswert 'center' und der Standardabweichung 'scale' folgt erstellt und an das Kafka Topic "Emphasised Signal"
+    geschickt.
+
+    Args:
+        center (float): Der Erwartungswert der Normalverteilung
+        scale (float): Die Standardabweichung der Normalverteilung
+    """    
     while(True):
         data = normal(loc=center, scale=scale, size=200)
         for i in data:
@@ -69,6 +75,14 @@ def sendEmphasisedRandomSinal(center,scale):
 
 
 def sendSpikedSignal(distance, propability, size, base):
+    """[summary]
+
+    Args:
+        distance (float): Der Abstand in dem ein potentieller Spike entsteht
+        propability (float): Die Wahrscheinlichkeit für einen Spike
+        size (float): Die Größe der Spikes
+        base (float): Die Basis des Signals
+    """    
     i=0
     while(True):
         if i % distance == 0 and random.random() <= propability:
@@ -77,7 +91,7 @@ def sendSpikedSignal(distance, propability, size, base):
         else:
             spiked_number = base 
             print(f"Sending number {spiked_number}")
-        producer.send('Emphasised-Signal', spiked_number)
+        producer.send('Spiked-Signal', spiked_number)
         sleep(0.2)
         i=i+1
     
@@ -85,9 +99,9 @@ def sendSpikedSignal(distance, propability, size, base):
        
         
 
-sendSpikedSignal(4,0.8,3.5,100)
+#sendSpikedSignal(4,0.8,3.5,100)
 #sendEmphasisedRandomSinal(100,8)
-#sendPeriodicCosinusSignal(50)
-#sendRandomSignal(1,100000)
+#sendPeriodicSinusSignal(20)
+sendRandomSignal(1,100000)
         
 
