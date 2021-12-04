@@ -15,7 +15,7 @@ producer = KafkaProducer(
 
 
 
-def sendRandomSignal(lowerBoundary, upperBoundary):
+def sendRandomSignal(lowerBoundary, upperBoundary,transmissionFrequency):
     """Es wird eine Random-Zahl zwischen 'lowerBoundary' und 'upperBoundary' erstellt und diese an das Kafka Topic "Random Signal" geschickt. 
     Danach schläft die Methode für eine Sekunde und wiederholt den Vorgang.
     
@@ -26,10 +26,10 @@ def sendRandomSignal(lowerBoundary, upperBoundary):
         random_number= int(random.randint(lowerBoundary,upperBoundary))
         print(f"Sending number {random_number}")
         producer.send('Random-Signal', random_number)
-        sleep(1)
+        sleep(transmissionFrequency)
         
 
-def sendPeriodicSinusSignal(frequence):
+def sendPeriodicSinusSignal(frequency,transmissionFrequency):
     """Es wird ein Sinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
     Args:
@@ -37,13 +37,13 @@ def sendPeriodicSinusSignal(frequence):
     """
     while(True):
         for i in range(0,360):
-            periodic_number= frequence*math.sin(math.radians(i))
+            periodic_number= frequency*math.sin(math.radians(i))
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
-            sleep(0.1)
+            sleep(transmissionFrequency)
             
 
-def sendPeriodicCosinusSignal(frequence):
+def sendPeriodicCosinusSignal(frequence,transmissionFrequency):
     """Es wird ein Cosinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
     Args:
@@ -54,10 +54,10 @@ def sendPeriodicCosinusSignal(frequence):
             periodic_number = frequence*math.cos(math.radians(i))
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
-            sleep(0.1)
+            sleep(transmissionFrequency)
 
 
-def sendEmphasisedRandomSinal(center,scale):
+def sendEmphasisedRandomSinal(center,scale,transmissionFrequency):
     """Es wird ein Signal, das einer Normalverteilung mit dem Erwartungswert 'center' und der Standardabweichung 'scale' folgt erstellt und an das Kafka Topic "Emphasised Signal"
     geschickt.
 
@@ -71,10 +71,10 @@ def sendEmphasisedRandomSinal(center,scale):
             emphasisedNumber = i
             print(f"Sending number {emphasisedNumber}")
             producer.send('Emphasised-Signal', emphasisedNumber)
-            sleep(0.2)
+            sleep(transmissionFrequency)
 
 
-def sendSpikedSignal(distance, propability, size, base):
+def sendSpikedSignal(distance, propability, size, base,transmissionFrequency):
     """[summary]
 
     Args:
@@ -92,7 +92,7 @@ def sendSpikedSignal(distance, propability, size, base):
             spiked_number = base 
             print(f"Sending number {spiked_number}")
         producer.send('Spiked-Signal', spiked_number)
-        sleep(0.2)
+        sleep(transmissionFrequency)
         i=i+1
     
 
