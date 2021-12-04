@@ -29,7 +29,7 @@ def sendRandomSignal(lowerBoundary, upperBoundary,transmissionFrequency):
         sleep(transmissionFrequency)
         
 
-def sendPeriodicSinusSignal(frequency,transmissionFrequency):
+def sendPeriodicSinusSignal(frequency,amplitude,transmissionFrequency):
     """Es wird ein Sinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
     Args:
@@ -37,13 +37,13 @@ def sendPeriodicSinusSignal(frequency,transmissionFrequency):
     """
     while(True):
         for i in range(0,360):
-            periodic_number= frequency*math.sin(math.radians(i))
+            periodic_number= amplitude*math.sin(frequency*math.radians(i))
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
             sleep(transmissionFrequency)
             
 
-def sendPeriodicCosinusSignal(frequence,transmissionFrequency):
+def sendPeriodicCosinusSignal(frequency,amplitude,transmissionFrequency):
     """Es wird ein Cosinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
 
     Args:
@@ -51,7 +51,7 @@ def sendPeriodicCosinusSignal(frequence,transmissionFrequency):
     """
     while(True):
         for i in range(0,360):
-            periodic_number = frequence*math.cos(math.radians(i))
+            periodic_number = amplitude*math.cos(frequency*math.radians(i))
             print(f"Sending number {periodic_number}")
             producer.send('Periodic-Signal', periodic_number)
             sleep(transmissionFrequency)
@@ -101,7 +101,7 @@ def sendSpikedSignal(distance, propability, size, base,transmissionFrequency):
 
 #sendSpikedSignal(4,0.8,3.5,100)
 #sendEmphasisedRandomSinal(100,8)
-#sendPeriodicSinusSignal(20)
-sendRandomSignal(1,100000)
+#sendPeriodicSinusSignal(5,30,.2)
+#sendRandomSignal(1,100000)
         
 
