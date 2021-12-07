@@ -17,10 +17,12 @@ producer = KafkaProducer(
 
 def sendRandomSignal(lowerBoundary, upperBoundary,transmissionFrequency):
     """Es wird eine Random-Zahl zwischen 'lowerBoundary' und 'upperBoundary' erstellt und diese an das Kafka Topic "Random Signal" geschickt. 
-    Danach schläft die Methode für eine Sekunde und wiederholt den Vorgang.
+    'transmissionFrequency' beschreibt die Übertragungsrate des Signals.
     
     Args:
+        lowerBoundary (int): Die untere Grenze des Signals        
         upperBoundary (int): Die obere Grenze des Signals
+        transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """
     while(True):
         random_number= int(random.randint(lowerBoundary,upperBoundary))
@@ -30,10 +32,13 @@ def sendRandomSignal(lowerBoundary, upperBoundary,transmissionFrequency):
         
 
 def sendPeriodicSinusSignal(frequency,amplitude,transmissionFrequency):
-    """Es wird ein Sinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
+    """Es wird ein Sinus-Singal mit der übergebenen Frequenz und Amplitude erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
+    'transmissionFrequency' beschreibt die Übertragungsrate des Signals.
 
     Args:
-        frequence (float): Die Frequenz des Signals
+        frequency (float): Die Frequenz des Signals
+        amplitude (float): Die Amplitude des Signals
+        transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """
     while(True):
         for i in range(0,360):
@@ -44,10 +49,13 @@ def sendPeriodicSinusSignal(frequency,amplitude,transmissionFrequency):
             
 
 def sendPeriodicCosinusSignal(frequency,amplitude,transmissionFrequency):
-    """Es wird ein Cosinus-Singal mit der übergebenen Frequenz erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
+    """Es wird ein Cosinus-Singal mit der übergebenen Frequenz und Amplitude erstellt und an das Kafka Topic "Periodic Signal" geschickt. 
+    'transmissionFrequency' beschreibt die Übertragungsrate des Signals.
 
     Args:
         frequence (float): Die Frequenz des Signals
+        amplitude (float): Die Amplitude des Signals
+        transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """
     while(True):
         for i in range(0,360):
@@ -59,11 +67,12 @@ def sendPeriodicCosinusSignal(frequency,amplitude,transmissionFrequency):
 
 def sendEmphasisedRandomSinal(center,scale,transmissionFrequency):
     """Es wird ein Signal, das einer Normalverteilung mit dem Erwartungswert 'center' und der Standardabweichung 'scale' folgt erstellt und an das Kafka Topic "Emphasised Signal"
-    geschickt.
+    geschickt. 'transmissionFrequency' beschreibt die Übertragungsrate des Signals.
 
     Args:
         center (float): Der Erwartungswert der Normalverteilung
         scale (float): Die Standardabweichung der Normalverteilung
+        transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """    
     while(True):
         data = normal(loc=center, scale=scale, size=200)
@@ -74,14 +83,16 @@ def sendEmphasisedRandomSinal(center,scale,transmissionFrequency):
             sleep(transmissionFrequency)
 
 
-def sendSpikedSignal(distance, propability, size, base,transmissionFrequency):
-    """[summary]
+def sendSpikedSignal(base, distance, propability, size, transmissionFrequency):
+    """Es wird ein Signal mit der Basis 'base' erstellt, welches in Abständen 'distance' mit der Wahrscheinlichkeit 'propablity' einen Spike der Größe 'size' besitzt.
+    'transmissionFrequency' beschreibt die Übertragungsrate des Signals.
 
     Args:
+        base (float): Die Basis des Signals
         distance (float): Der Abstand in dem ein potentieller Spike entsteht
         propability (float): Die Wahrscheinlichkeit für einen Spike
         size (float): Die Größe der Spikes
-        base (float): Die Basis des Signals
+        transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """    
     i=0
     while(True):
