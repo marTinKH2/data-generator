@@ -114,5 +114,6 @@ def sendSpikedSignal(base, distance, propability, size, transmissionFrequency):
 #sendEmphasisedRandomSinal(100,8)
 #sendPeriodicSinusSignal(5,30,.2)
 #sendRandomSignal(1,100000)
+#test
         
 
