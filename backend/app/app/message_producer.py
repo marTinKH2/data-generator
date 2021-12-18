@@ -3,14 +3,13 @@ from numpy.random import normal
 from time import sleep
 from kafka import KafkaProducer
 
-
 def serialize(signal):
     """Serialisierung des übergebenen Signals."""
     return json.dumps(signal).encode(('utf-8'))
 
 producer = KafkaProducer(
     bootstrap_servers=['localhost:9092'],
-    value_serializer=serialize
+    api_version=(0,11,5)
     )    
 
 
@@ -24,11 +23,13 @@ def sendRandomSignal(lowerBoundary, upperBoundary,transmissionFrequency):
         upperBoundary (int): Die obere Grenze des Signals
         transmissionFrequency(float): Pause zwischen den einzelnen Werten des Signals
     """
-    while(True):
+    i=0
+    while(i<10):
         random_number= int(random.randint(lowerBoundary,upperBoundary))
         print(f"Sending number {random_number}")
-        producer.send('Random-Signal', random_number)
+        producer.send('Random-Signal', value=serialize((random_number)))
         sleep(transmissionFrequency)
+        i=i+1
         
 
 def sendPeriodicSinusSignal(frequency,amplitude,transmissionFrequency):
@@ -113,7 +114,6 @@ def sendSpikedSignal(base, distance, propability, size, transmissionFrequency):
 #sendSpikedSignal(4,0.8,3.5,100)
 #sendEmphasisedRandomSinal(100,8)
 #sendPeriodicSinusSignal(5,30,.2)
-#sendRandomSignal(1,100000)
-#test
+#sendRandomSignal(1,100000,1)
         
 
