@@ -17,7 +17,7 @@ export default function Header(props) {
   const colorMode = React.useContext(ColorModeContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -26,10 +26,10 @@ export default function Header(props) {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Data generator
+            Datastream Generator
           </Typography>
           <IconButton
             sx={{ ml: 20 }}
@@ -42,9 +42,7 @@ export default function Header(props) {
               <Brightness4Icon />
             )}
           </IconButton>
-          <Button color="inherit">About</Button>
-          <Button color="inherit">News</Button>
-          <Button color="inherit">Login</Button>
+         
         </Toolbar>
       </AppBar>
     </Box>
